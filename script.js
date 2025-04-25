@@ -46,3 +46,57 @@ if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.match
     localStorage.theme = 'light';
   }
 }
+
+// Scroll animations
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize Intersection Observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      // If the element is in viewport
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+      }
+    });
+  }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
+
+  // Observe all sections with animation
+  const sections = document.querySelectorAll('#about, #services, #work, #contact');
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+
+  // Add hover animations to service cards
+  const serviceCards = document.querySelectorAll('#services .border');
+  serviceCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.classList.add('scale-105');
+      card.style.transition = 'all 0.3s ease';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.classList.remove('scale-105');
+    });
+  });
+
+  // Add typing animation to the heading
+  const animateTyping = (element, text, speed = 100) => {
+    let i = 0;
+    element.textContent = '';
+    const timer = setInterval(() => {
+      if (i < text.length) {
+        element.textContent += text.charAt(i);
+        i++;
+      } else {
+        clearInterval(timer);
+      }
+    }, speed);
+  };
+
+  // Apply typing animation to the main heading after a delay
+  setTimeout(() => {
+    const mainHeading = document.querySelector('.h-screen h3');
+    if (mainHeading) {
+      const originalText = mainHeading.textContent;
+      animateTyping(mainHeading, originalText);
+    }
+  }, 1000);
+});

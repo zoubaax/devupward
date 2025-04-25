@@ -30,7 +30,7 @@
         <img src="img/logoN.png" alt="logo" class="w-28 cursor-pointer mr-14 hidden dark:block">
 
 
-        <ul class="hidden md:flex items-center gab-6 lg:gap-8 rounded-full px-12 py-3
+        <ul class="hidden md:flex items-center gab-6 lg:gap-8 rounded-full px-12 py-3 ml-8
          bg- bleu shadow-sm bg-opacity-50 font-Ovo
          dark:border dark:border-white/50 dark:bg-transparent">
             <li><a href="#top">Home</a></li>
@@ -89,13 +89,13 @@
 
 
 
-    <div class="w-11/12 max-w-3xl text-center mx-auto h-screen flex flex-col items-center justify-center gap-4">
+    <div class="w-11/12 max-w-3xl text-center mx-auto h-screen flex flex-col items-center justify-center gap-4 animate-fadeIn">
         <img src="./img/logo.png" alt="" class="rounded-full w-33 dark:hidden">
         <img src="./img/logoN.png" alt="" class="rounded-full w-33 hidden dark:block">
-        <h3 class="flex items-end gap-2 text-xl md:text-2xl mb-3 font-Ovo">Hi! We are DEVUPWARD <img
-                src="./img/hand-icon.png" alt="" class="w-6 "></h3>
+        <h3 class="flex items-end gap-2 text-xl md:text-2xl mb-3 font-Ovo animate-slideUp">Hi! We are DEVUPWARD <img
+                src="./img/hand-icon.png" alt="" class="w-6 animate-bounce"></h3>
 
-        <p class="max-w-3xl mx-auto font-Ovo">Your vision is our mission, where we create smooth and engaging websites
+        <p class="max-w-3xl mx-auto font-Ovo animate-slideUp" style="animation-delay: 0.2s">Your vision is our mission, where we create smooth and engaging websites
             tailored
             to your needs</p>
 
@@ -103,7 +103,7 @@
 
 
 
-        <div class="flex flex-col sm:flex-row items-center gap-4 mt-4">
+        <div class="flex flex-col sm:flex-row items-center gap-4 mt-4 animate-slideUp" style="animation-delay: 0.4s">
             <a href="#contact " class="px-10 py-3 border rounded-full bg-gradient-to-r from-[#3b72ff] 
                 to-[#92b0ff] text-white flex items-center gap-2 dark:border-transparent">
                 Contact us <img src="./img/right-arrow-white.png" alt="" class="w-4"> </a>
@@ -120,13 +120,13 @@
     <!------------------- daba khas l about us------------------------>
 
 
-    <div id="about" class="w-full px-[12%] py-10 scroll-mt-20">
-        <h4 class="text-center mb-2 text-lg font-Ovo">Introdaction</h4>
-        <h2 class="text-center text-5xl font-Ovo ">About us</h2>
+    <div id="about" class="w-full px-[12%] py-10 scroll-mt-20 opacity-0 transition-opacity duration-1000" id="about-section">
+        <h4 class="text-center mb-2 text-lg font-Ovo">Introduction</h4>
+        <h2 class="text-center text-5xl font-Ovo animate-pulse">About us</h2>
 
 
         <div class="flex w-full flex-col lg:flex-row items-center gap-20 my-20">
-            <div class="max-w-max mx-auto relative">
+            <div class="max-w-max mx-auto relative animate-slideInLeft">
                 <img src="./img/about-img.png" alt="" class="w-64 sm:w-80 rounded-3xl max-w-none">
 
                 <div
@@ -138,7 +138,7 @@
 
 
             </div>
-            <div class="flex-1">
+            <div class="flex-1 animate-slideInRight">
                 <p class="mb-10 max-w-2xl font-Ovo">At DevUpward, we’re passionate about delivering high-impact digital
                     marketing
                     services that empower businesses to excel in the digital landscape.
@@ -211,7 +211,7 @@
 
     <!------------------services------------------->
 
-    <div id="services" class="w-full px-[12%] py-10 scroll-mt-20">
+    <div id="services" class="w-full px-[12%] py-10 scroll-mt-20 opacity-0 transition-opacity duration-1000" id="services-section">
         <h4 class="text-center mb-2 text-lg font-Ovo">What we offer</h4>
         <h2 class="text-center text-5xl font-Ovo">OUR SERVICES</h2>
         
@@ -252,7 +252,7 @@
 
     <!----------------our work---------------->
 
-    <div id="work" class="w-full px-[12%] py-10 scroll-mt-20">
+    <div id="work" class="w-full px-[12%] py-10 scroll-mt-20 opacity-0 transition-opacity duration-1000" id="work-section">
         <h4 class="text-center mb-2 text-lg font-Ovo">Our work</h4>
         <h2 class="text-center text-5xl font-Ovo">Past Projects</h2>
  
@@ -329,7 +329,7 @@
 
     <div id="contact"
         class="w-full px-[12%] py-10 scroll-mt-20 bg-[url('./img/footer-bg-color.png')] bg-no-repeat bg-[length:96%_auto] bg-center
-        dark:bg-none">
+        dark:bg-none opacity-0 transition-opacity duration-1000" id="contact-section">
         <h4 class="text-center mb-2 text-lg font-Ovo">Contact US</h4>
         
         <form  method="POST" action="https://api.web3forms.com/submit" class="max-w-2xl mx-auto">
@@ -339,12 +339,12 @@
 
             <div class="grid grid-cols-auto gap-6 mt-10 mb-8">
                 <input type="text" placeholder="Enter your name"
-                    class="flex-1 p-3 outline-none border-[0.5px] border-gray-400 rounded-md bg-white" required required name="name">
+                    class="flex-1 p-3 outline-none border-[0.5px] border-gray-400 rounded-md bg-white text-black" required required name="name">
                 <input type="email" placeholder="Enter your email"
-                    class="flex-1 p-3 outline-none border-[0.5px] border-gray-400 rounded-md bg-white" required required name="email">
+                    class="flex-1 p-3 outline-none border-[0.5px] border-gray-400 rounded-md bg-white text-black" required required name="email">
             </div>
             <textarea rows="6" placeholder="Enter your message"
-                class="w-full p-4 outline-none border-[0.5px] border-gray-400 rounded-md bg-white mb-6" required name="message"></textarea>
+                class="w-full p-4 outline-none border-[0.5px] border-gray-400 rounded-md bg-white mb-6 text-black" required name="message"></textarea>
 
             <button
                 class="py-3 px-8 w-max flex items-center justify-between gap-2 bg-black/80 text-white rounded-full mx-auto hover:bg-black duration-500
