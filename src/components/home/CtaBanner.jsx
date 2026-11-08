@@ -1,65 +1,48 @@
 import React from 'react'
 import { ArrowRight } from 'lucide-react'
-import { DiscordIcon, GithubIcon } from '../common/BrandIcons'
 import { SOCIAL_LINKS } from '../../data/navigation'
 
 export function CtaBanner() {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-      <div className="relative rounded-3xl overflow-hidden glass-panel border border-[#FF5500]/30 p-8 sm:p-14 text-center shadow-2xl shadow-orange-950/40">
+    <section className="py-24 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/10 bg-[#000000]">
+      <div className="border border-white/10 p-10 sm:p-16 relative overflow-hidden bg-gradient-to-b from-white/[0.02] to-transparent">
         
-        {/* Ambient Glows */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FF5500]/15 via-[#FF5500]/5 to-transparent pointer-events-none" />
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 bg-[#FF5500]/25 rounded-full blur-[100px] pointer-events-none" />
+        {/* Subtle orange accent line */}
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#FF5500] to-transparent opacity-80" />
 
-        <div className="relative z-10 max-w-2xl mx-auto">
-          {/* Logo center mark */}
-          <div className="flex justify-center mb-6">
-            <img 
-              src="/logo.png" 
-              alt="DevUpward" 
-              className="h-14 w-auto object-contain filter drop-shadow-[0_0_20px_rgba(255,85,0,0.4)]" 
-            />
-          </div>
-
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4">
-            Stop Building In Isolation.
+        <div className="max-w-2xl">
+          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#FF5500] block mb-3">
+            INITIALIZE // 07
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-normal tracking-tight text-white mb-4 leading-tight">
+            Stop coding in isolation.
           </h2>
-          <p className="text-gray-300 text-base sm:text-lg mb-8 leading-relaxed">
-            Join thousands of curious software engineers, discover your next favorite project, 
-            and build what's next with DevUpward today.
+          <p className="text-white/60 text-xs sm:text-sm font-mono mb-8 leading-relaxed">
+            Join 2,800+ builders worldwide. Ship open-source code, get PR reviews, and build what's next.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <a
               href={SOCIAL_LINKS.discord}
               target="_blank"
               rel="noreferrer"
-              className="w-full sm:w-auto relative group inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl text-white font-semibold text-sm shadow-xl shadow-orange-950/60 overflow-hidden transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              className="px-8 py-3.5 bg-white text-black text-xs font-mono uppercase tracking-widest font-semibold hover:bg-white/90 transition-all flex items-center gap-2 group"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#FF5500] via-[#FF6611] to-[#E64400]" />
-              <DiscordIcon className="w-4 h-4 relative z-10" />
-              <span className="relative z-10 tracking-wide">Get Free Invite</span>
-              <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
+              <span>Enter Discord Sanctuary</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </a>
 
-            <a
-              href={SOCIAL_LINKS.github}
-              target="_blank"
-              rel="noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-gray-200 font-mono text-xs sm:text-sm transition-all"
-            >
-              <GithubIcon className="w-4 h-4 text-gray-300" />
-              <span>Explore GitHub</span>
-            </a>
+            <div className="px-5 py-3.5 border border-white/15 text-xs font-mono text-white/60">
+              <span className="text-[#FF5500]">$</span> npx devupward join
+            </div>
           </div>
-          
-          <p className="text-xs text-gray-500 font-mono mt-6">
-            Instant Discord Access • Zero Spam • Open to All Engineers
-          </p>
+        </div>
+
+        {/* Ambient background watermark mark */}
+        <div className="absolute -right-10 -bottom-10 opacity-5 pointer-events-none hidden md:block">
+          <img src="/logo.png" alt="DevUpward" className="h-64 w-auto object-contain" />
         </div>
       </div>
     </section>
   )
 }
-

@@ -1,13 +1,6 @@
 import React, { useState } from 'react'
-import { Cpu, Laptop, Layers, Code2, Flame } from 'lucide-react'
 import { COMMUNITY_TRACKS } from '../../data/community'
-
-const TRACK_ICONS = {
-  ai: Cpu,
-  frontend: Laptop,
-  systems: Layers,
-  oss: Code2,
-}
+import { ArrowUpRight } from 'lucide-react'
 
 export function Tracks() {
   const [selectedFilter, setSelectedFilter] = useState('all')
@@ -17,31 +10,28 @@ export function Tracks() {
     : COMMUNITY_TRACKS.filter((t) => t.id === selectedFilter)
 
   return (
-    <section id="tracks" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/[0.08]">
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+    <section id="tracks" className="py-24 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/10 bg-[#000000]">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div>
-          <span className="text-xs uppercase font-mono tracking-widest text-[#FF5500] font-bold">
-            Focused Guilds
+          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#FF5500] block mb-2">
+            SPECIALIZED CHANNELS // 02
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight mt-2">
-            Engineering Tracks & Channels
+          <h2 className="text-3xl sm:text-4xl font-normal tracking-tight text-white">
+            Engineering Tracks
           </h2>
-          <p className="text-gray-400 mt-2 max-w-xl text-sm sm:text-base">
-            Join the exact guild matching your current tech stack and focus area.
-          </p>
         </div>
 
         {/* Filter Pills */}
-        <div className="flex flex-wrap gap-2 mt-6 md:mt-0">
+        <div className="flex flex-wrap gap-1.5">
           {['all', 'ai', 'frontend', 'systems', 'oss'].map((filter) => (
             <button
               key={filter}
               type="button"
               onClick={() => setSelectedFilter(filter)}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-mono capitalize transition-all ${
+              className={`px-3 py-1 text-[11px] font-mono uppercase tracking-wider transition-all border ${
                 selectedFilter === filter
-                  ? 'bg-[#FF5500] text-white font-semibold shadow-md shadow-orange-950/40'
-                  : 'bg-white/[0.03] text-gray-400 hover:text-white border border-white/5'
+                  ? 'bg-white text-black border-white font-semibold'
+                  : 'bg-transparent text-white/50 border-white/10 hover:border-white/30 hover:text-white'
               }`}
             >
               {filter === 'all' ? 'All Tracks' : filter}
@@ -50,50 +40,46 @@ export function Tracks() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {visibleTracks.map((track) => {
-          const Icon = TRACK_ICONS[track.id] || Code2
-          return (
-            <div 
-              key={track.id} 
-              className="rounded-2xl glass-panel p-7 glass-panel-hover transition-all duration-300 border border-white/10 flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/25 flex items-center justify-center text-[#FF5500]">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <span className="text-xs font-mono text-gray-400 bg-white/[0.03] px-2.5 py-1 rounded-md border border-white/5">
-                    {track.memberCount} members
-                  </span>
-                </div>
-
-                <h3 className="text-xl font-bold text-white mb-2">{track.title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed mb-6">{track.description}</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10 border border-white/10">
+        {visibleTracks.map((track) => (
+          <div 
+            key={track.id} 
+            className="bg-[#000000] p-8 sm:p-10 flex flex-col justify-between hover:bg-white/[0.02] transition-colors group"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-6 text-[11px] font-mono text-white/40">
+                <span>{track.memberCount} BUILDERS</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-white/20 group-hover:text-white transition-colors" />
               </div>
 
-              <div>
-                <div className="mb-4 p-3 rounded-lg bg-black/40 border border-white/5 text-xs font-mono text-gray-300 flex items-center gap-2">
-                  <Flame className="w-4 h-4 text-[#FF5500] shrink-0" />
-                  <span className="truncate">Active RFC: <span className="text-gray-400">{track.activeDiscussion}</span></span>
-                </div>
+              <h3 className="text-2xl font-normal text-white mb-3">
+                {track.title}
+              </h3>
+              <p className="text-white/60 text-xs sm:text-sm leading-relaxed font-light mb-8">
+                {track.description}
+              </p>
+            </div>
 
-                <div className="flex flex-wrap gap-1.5">
-                  {track.technologies.map((tech) => (
-                    <span 
-                      key={tech} 
-                      className="text-xs font-mono px-2.5 py-1 rounded-md bg-white/[0.03] text-gray-400 border border-white/5"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+            <div>
+              <div className="mb-6 p-3 bg-white/[0.02] border border-white/10 text-[11px] font-mono text-white/70 flex items-center justify-between">
+                <span className="text-[#FF5500]">ACTIVE RFC</span>
+                <span className="text-white/50 truncate max-w-[280px]">{track.activeDiscussion}</span>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {track.technologies.map((tech) => (
+                  <span 
+                    key={tech} 
+                    className="text-[10px] font-mono px-2 py-0.5 border border-white/10 text-white/50"
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
             </div>
-          )
-        })}
+          </div>
+        ))}
       </div>
     </section>
   )
 }
-
