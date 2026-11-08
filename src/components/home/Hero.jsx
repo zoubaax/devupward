@@ -38,26 +38,26 @@ export function Hero() {
           <img 
             src="/dither-hero.jpg" 
             alt="DevUpward - Shadow Base" 
-            className="absolute inset-0 w-full h-full object-contain object-center opacity-25 filter brightness-50 contrast-125 pointer-events-none transition-opacity duration-500"
+            className="absolute inset-0 w-full h-full object-contain object-center opacity-30 filter brightness-60 contrast-125 pointer-events-none transition-opacity duration-500"
           />
 
-          {/* LAYER B: Dynamic Torch Light (Reveals and lights up the figures brightly under cursor) */}
+          {/* LAYER B: Dynamic Torch Light (Expanded radius & boosted brightness) */}
           <div 
-            className="absolute inset-0 w-full h-full pointer-events-none z-10 transition-opacity duration-300"
+            className="absolute inset-0 w-full h-full pointer-events-none z-10 transition-opacity duration-200"
             style={{
               opacity: mousePos.active ? 1 : 0,
-              maskImage: `radial-gradient(circle 220px at ${mousePos.x}px ${mousePos.y}px, black 15%, transparent 100%)`,
-              WebkitMaskImage: `radial-gradient(circle 220px at ${mousePos.x}px ${mousePos.y}px, black 15%, transparent 100%)`,
+              maskImage: `radial-gradient(circle 300px at ${mousePos.x}px ${mousePos.y}px, black 25%, transparent 100%)`,
+              WebkitMaskImage: `radial-gradient(circle 300px at ${mousePos.x}px ${mousePos.y}px, black 25%, transparent 100%)`,
             }}
           >
             <img 
               src="/dither-hero.jpg" 
               alt="DevUpward - Illuminated Torch" 
-              className="w-full h-full object-contain object-center filter brightness-125 contrast-150"
+              className="w-full h-full object-contain object-center filter brightness-150 contrast-160"
             />
-            {/* Warm amber light glow at the touch point */}
+            {/* Ambient warm amber glow following the cursor */}
             <div 
-              className="absolute pointer-events-none -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[#FF6600]/25 rounded-full blur-2xl"
+              className="absolute pointer-events-none -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#FF6600]/35 rounded-full blur-3xl"
               style={{
                 left: mousePos.x,
                 top: mousePos.y,
