@@ -38,9 +38,9 @@ export function Hero() {
           accentColor="#FF5500"
           className="w-full h-full"
         >
-          {/* Base Artwork - Majestic Fullscreen Backdrop */}
+          {/* Base Artwork - Scaled & Positioned to eliminate excess black space at the top */}
           <div 
-            className="absolute inset-0 w-full h-full bg-contain bg-center bg-no-repeat opacity-90 filter brightness-95 contrast-110"
+            className="absolute inset-0 w-full h-full bg-cover bg-[center_35%] bg-no-repeat opacity-90 filter brightness-95 contrast-110"
             style={{ backgroundImage: `url(${heroArtwork})` }}
           />
 
@@ -58,7 +58,7 @@ export function Hero() {
             }}
           >
             <div 
-              className="w-full h-full bg-contain bg-center bg-no-repeat filter brightness-150 contrast-160"
+              className="w-full h-full bg-cover bg-[center_35%] bg-no-repeat filter brightness-150 contrast-160"
               style={{ backgroundImage: `url(${heroArtwork})` }}
             />
             {/* Ambient warm amber glow following the cursor */}
@@ -73,21 +73,19 @@ export function Hero() {
         </SwarmCursor>
       </div>
 
-      {/* 2. Middle-Left Hero Composition */}
+      {/* 2. Middle-Left Hero Composition: Headline + Buttons Stacked Down Below It */}
       <div className="relative z-30 w-full max-w-7xl mx-auto px-6 sm:px-12 pointer-events-auto">
-        <div className="inline-flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-10 max-w-full">
+        <div className="max-w-xl flex flex-col gap-6">
           
-          {/* Headline on the left */}
-          <div className="shrink-0 max-w-lg">
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight leading-[1.08] drop-shadow-2xl">
-              <span className="text-white block font-medium">Where builders connect</span>
-              <span className="text-white/40 block font-light">the architecture</span>
-              <span className="text-white/40 block font-light">they believe in</span>
-            </h1>
-          </div>
+          {/* Headline */}
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight leading-[1.08] drop-shadow-2xl">
+            <span className="text-white block font-medium">Where builders connect</span>
+            <span className="text-white/40 block font-light">the architecture</span>
+            <span className="text-white/40 block font-light">they believe in</span>
+          </h1>
 
-          {/* CTA Group immediately to the right, stacked vertically */}
-          <div className="shrink-0 flex flex-col gap-3 pt-2 lg:pt-0">
+          {/* CTAs positioned down below the text */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 pt-1">
             <a
               href={SOCIAL_LINKS.discord}
               target="_blank"
@@ -102,12 +100,12 @@ export function Hero() {
               <span className="text-[#FF5500]">$</span>
               <span>npx devupward</span>
             </div>
+          </div>
 
-            {/* Interaction hint placed below the CTA group */}
-            <div className="pt-2 text-[10px] font-mono text-white/40 tracking-widest uppercase flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FF5500] animate-pulse" />
-              <span>Hover to illuminate • Click to burst</span>
-            </div>
+          {/* Interaction hint */}
+          <div className="text-[10px] font-mono text-white/40 tracking-widest uppercase flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FF5500] animate-pulse" />
+            <span>Hover to illuminate • Click to burst</span>
           </div>
 
         </div>
