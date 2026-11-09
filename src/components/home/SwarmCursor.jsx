@@ -157,6 +157,8 @@ const SwarmCursor = ({
   depth = 0.7,
   targets = 'a, button, [data-swarm-target]',
   idle = 'roam',
+  idleTarget = { x: 0.5, y: 0.515 },
+  idleTimeout = 1200,
   clickEffect = 'burst',
   hideCursor = false,
   intro = true,
@@ -187,6 +189,8 @@ const SwarmCursor = ({
     depth: clamp(depth, 0, 1),
     targets,
     idle,
+    idleTarget,
+    idleTimeout,
     clickEffect,
     hideCursor,
     intro,
@@ -290,7 +294,7 @@ const SwarmCursor = ({
     let pressure = new Float32Array(1);
     let divergence = new Float32Array(1);
     let curl = new Float32Array(1);
-    const pointer = { x: 0, y: 0, inside: false };
+    const pointer = { x: 0, y: 0, inside: false, lastMove: 0 };
     const anchor = { x: 0, y: 0, lastX: 0, lastY: 0, moveX: 0, moveY: 0 };
     const ring = { active: false, x: 0, y: 0, hx: 0, hy: 0, corner: 0, spin: 1 };
     const burst = { age: 10 };
@@ -661,17 +665,25 @@ const SwarmCursor = ({
         ring.active = false;
       }
       let goal = 1;
-      if (pointer.inside) {
+      const now = performance.now();
+      const isActivelyMoving = pointer.inside && (now - pointer.lastMove < (s.idleTimeout ?? 1200));
+
+      const targetX = w * (s.idleTarget?.x ?? 0.5);
+      const targetY = h * (s.idleTarget?.y ?? 0.515);
+
+      // Micro-orbit around the spark to keep it alive and luminous
+      const orbitRadius = 18;
+      const orbitX = targetX + Math.cos(time * 1.1) * orbitRadius + Math.sin(time * 2.3) * 6;
+      const orbitY = targetY + Math.sin(time * 0.95) * (orbitRadius * 0.8) + Math.cos(time * 1.9) * 5;
+
+      if (isActivelyMoving) {
         anchor.x = pointer.x;
         anchor.y = pointer.y;
-      } else if (s.idle === 'gather') {
-        anchor.x = w * 0.5;
-        anchor.y = h * 0.5;
-      } else if (s.idle === 'hide') {
-        goal = 0;
       } else {
-        anchor.x = w * (0.5 + 0.3 * Math.sin(time * 0.21) + 0.06 * Math.sin(time * 0.53 + 1.7));
-        anchor.y = h * (0.5 + 0.24 * Math.sin(time * 0.29 + 0.8) + 0.05 * Math.sin(time * 0.71));
+        // Smoothly glide to the orange circle
+        const easeSpeed = 1 - Math.exp(-dt * 3.5);
+        anchor.x += (orbitX - anchor.x) * easeSpeed;
+        anchor.y += (orbitY - anchor.y) * easeSpeed;
       }
       if (dt > 0) {
         const moveX = clamp((anchor.x - anchor.lastX) / dt, -4000, 4000);
@@ -842,11 +854,15 @@ const SwarmCursor = ({
       pointer.x = x;
       pointer.y = y;
       pointer.inside = inside;
+      pointer.lastMove = performance.now();
+      wake();
     };
 
     const onPointerDown = event => {
       const s = settingsRef.current;
       const { x, y, inside } = locate(event);
+      pointer.lastMove = performance.now();
+      wake();
       if (!inside || !s.enabled || reduce || s.clickEffect === 'none') return;
       const reachOut = s.spread * 2.2;
       if (s.clickEffect === 'pulse') {
@@ -934,7 +950,6 @@ const SwarmCursor = ({
       gl.deleteBuffer(extraBuffer);
       gl.deleteVertexArray(vao);
       gl.deleteProgram(shader.program);
-      gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
   }, []);
 
@@ -951,7 +966,12 @@ const SwarmCursor = ({
     >
       <style>{`.${HIDDEN}, .${HIDDEN} * { cursor: none !important; }`}</style>
       {children ? <div className="relative h-full w-full">{children}</div> : null}
-      <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 block h-full w-full z-20" aria-hidden="true" />
+      <canvas
+        ref={canvasRef}
+        className="pointer-events-none absolute inset-0 block h-full w-full z-20 bg-transparent"
+        style={{ backgroundColor: 'transparent' }}
+        aria-hidden="true"
+      />
     </div>
   );
 };
