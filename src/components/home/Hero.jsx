@@ -1,10 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { SOCIAL_LINKS } from '../../data/navigation'
 import heroArtwork from '../../assets/hero-artwork.jpg'
 
 export function Hero() {
   const [mousePos, setMousePos] = useState({ x: -1000, y: -1000, active: false })
+  const [scrollY, setScrollY] = useState(0)
+
+  useEffect(() => {
+    let ticking = false
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrollY(window.scrollY)
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -19,46 +37,65 @@ export function Hero() {
     setMousePos({ x: -1000, y: -1000, active: false })
   }
 
+  // Smooth scroll-driven zoom: scales from 1.0 to 1.32 targeting the orange spark
+  const scrollProgress = Math.min(Math.max(scrollY / 800, 0), 1)
+  const imageScale = 1 + scrollProgress * 0.32
+
   return (
     <section 
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className="relative w-full h-screen min-h-[680px] bg-[#000000] text-white flex items-center justify-center pt-16 overflow-hidden select-none group"
     >
-      {/* 1. Fullscreen Background Image & Torch Light */}
-      <div className="absolute inset-0 w-full h-full">
-        {/* Base Artwork - Zoomed and centered in the middle on mobile, shifted right on desktop */}
+      {/* 1. Fullscreen Background Image with Scroll-Driven Zoom */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
         <div 
-          className="absolute inset-0 w-full h-full bg-cover bg-[center_55%] md:bg-[64%_38%] bg-no-repeat opacity-90 filter brightness-95 contrast-110"
-          style={{ backgroundImage: `url(${heroArtwork}), url('/hero-artwork.jpg')` }}
-        />
-
-        {/* Vignette Gradients */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/60 pointer-events-none z-10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/60 pointer-events-none z-10" />
-
-        {/* Dynamic Torch Light on Hover (Over Artwork) */}
-        <div 
-          className="absolute inset-0 w-full h-full pointer-events-none z-10 transition-opacity duration-200"
+          className="absolute inset-0 w-full h-full will-change-transform"
           style={{
-            opacity: mousePos.active ? 1 : 0,
-            maskImage: `radial-gradient(circle 360px at ${mousePos.x}px ${mousePos.y}px, black 25%, transparent 100%)`,
-            WebkitMaskImage: `radial-gradient(circle 360px at ${mousePos.x}px ${mousePos.y}px, black 25%, transparent 100%)`,
+            transform: `scale(${imageScale})`,
+            transformOrigin: '50% 55%',
+            transition: 'transform 0.08s ease-out',
           }}
         >
+          {/* Base Artwork - Zoomed and centered in the middle on mobile, shifted right on desktop */}
           <div 
-            className="w-full h-full bg-cover bg-[center_55%] md:bg-[64%_38%] bg-no-repeat filter brightness-150 contrast-160"
+            className="absolute inset-0 w-full h-full bg-cover bg-[center_55%] md:bg-[64%_38%] bg-no-repeat opacity-90 filter brightness-95 contrast-110"
             style={{ backgroundImage: `url(${heroArtwork}), url('/hero-artwork.jpg')` }}
           />
-          {/* Ambient warm amber glow following the cursor */}
+
+          {/* Vignette Gradients */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/60 pointer-events-none z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/60 pointer-events-none z-10" />
+
+          {/* Dynamic Torch Light on Hover (Over Artwork) */}
           <div 
-            className="absolute pointer-events-none -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-[#FF6600]/30 rounded-full blur-3xl"
+            className="absolute inset-0 w-full h-full pointer-events-none z-10 transition-opacity duration-200"
             style={{
-              left: mousePos.x,
-              top: mousePos.y,
+              opacity: mousePos.active ? 1 : 0,
+              maskImage: `radial-gradient(circle 360px at ${mousePos.x}px ${mousePos.y}px, black 25%, transparent 100%)`,
+              WebkitMaskImage: `radial-gradient(circle 360px at ${mousePos.x}px ${mousePos.y}px, black 25%, transparent 100%)`,
             }}
-          />
+          >
+            <div 
+              className="w-full h-full bg-cover bg-[center_55%] md:bg-[64%_38%] bg-no-repeat filter brightness-150 contrast-160"
+              style={{ backgroundImage: `url(${heroArtwork}), url('/hero-artwork.jpg')` }}
+            />
+            {/* Ambient warm amber glow following the cursor */}
+            <div 
+              className="absolute pointer-events-none -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-[#FF6600]/30 rounded-full blur-3xl"
+              style={{
+                left: mousePos.x,
+                top: mousePos.y,
+              }}
+            />
+          </div>
         </div>
+
+        {/* Gentle darkening overlay as user scrolls down */}
+        <div 
+          className="absolute inset-0 bg-black pointer-events-none z-20 transition-opacity duration-100"
+          style={{ opacity: scrollProgress * 0.5 }}
+        />
       </div>
 
       {/* 2. Content Lockup - Centered directly in the middle */}
