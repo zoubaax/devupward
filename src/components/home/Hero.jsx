@@ -21,96 +21,95 @@ export function Hero() {
   }
 
   return (
-    <section className="relative w-full h-screen max-h-screen bg-[#000000] text-white flex flex-col justify-between pt-20 pb-10 px-6 sm:px-12 max-w-7xl mx-auto overflow-hidden select-none">
-      
-      {/* 1. Point-Cloud Artwork, Torch Illumination & Swarm Visual */}
-      <div 
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        className="relative flex-1 w-full flex items-center justify-center cursor-crosshair group my-auto min-h-0 py-2"
-      >
-        <div className="relative w-full max-w-4xl h-[420px] sm:h-[480px] md:h-[560px]">
-          <SwarmCursor
-            count={800}
-            size={2.6}
-            spread={90}
-            swirl={0.6}
-            clickEffect="burst"
-            color="#FFAA55"
-            accentColor="#FF5500"
-            className="w-full h-full"
+    <section 
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative w-full h-screen min-h-[720px] bg-[#000000] text-white flex items-center pt-16 overflow-hidden select-none cursor-crosshair"
+    >
+      {/* 1. Fullscreen Background Image & SwarmCursor Canvas */}
+      <div className="absolute inset-0 w-full h-full">
+        <SwarmCursor
+          count={850}
+          size={2.6}
+          spread={95}
+          swirl={0.6}
+          clickEffect="burst"
+          color="#FFAA55"
+          accentColor="#FF5500"
+          className="w-full h-full"
+        >
+          {/* Base Artwork - Majestic Fullscreen Backdrop */}
+          <div 
+            className="absolute inset-0 w-full h-full bg-contain bg-center bg-no-repeat opacity-90 filter brightness-95 contrast-110"
+            style={{ backgroundImage: `url(${heroArtwork})` }}
+          />
+
+          {/* Vignette Gradients: Smoothly fades edges */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/60 pointer-events-none z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/60 pointer-events-none z-10" />
+
+          {/* Dynamic Torch Light on Hover */}
+          <div 
+            className="absolute inset-0 w-full h-full pointer-events-none z-10 transition-opacity duration-200"
+            style={{
+              opacity: mousePos.active ? 1 : 0,
+              maskImage: `radial-gradient(circle 340px at ${mousePos.x}px ${mousePos.y}px, black 25%, transparent 100%)`,
+              WebkitMaskImage: `radial-gradient(circle 340px at ${mousePos.x}px ${mousePos.y}px, black 25%, transparent 100%)`,
+            }}
           >
-            {/* Edge fades into pure black void */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black pointer-events-none z-10" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black pointer-events-none z-10" />
-            
-            {/* LAYER A: Base Artwork (Stippled figures and ridge) */}
             <div 
-              className="absolute inset-0 w-full h-full bg-contain bg-center bg-no-repeat opacity-85 filter brightness-90 contrast-110 pointer-events-none transition-opacity duration-500"
+              className="w-full h-full bg-contain bg-center bg-no-repeat filter brightness-150 contrast-160"
               style={{ backgroundImage: `url(${heroArtwork})` }}
             />
-
-            {/* LAYER B: Dynamic Torch Light on Hover (Brightens figures under the cursor) */}
+            {/* Ambient warm amber glow following the cursor */}
             <div 
-              className="absolute inset-0 w-full h-full pointer-events-none z-10 transition-opacity duration-200"
+              className="absolute pointer-events-none -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-[#FF6600]/30 rounded-full blur-3xl"
               style={{
-                opacity: mousePos.active ? 1 : 0,
-                maskImage: `radial-gradient(circle 320px at ${mousePos.x}px ${mousePos.y}px, black 25%, transparent 100%)`,
-                WebkitMaskImage: `radial-gradient(circle 320px at ${mousePos.x}px ${mousePos.y}px, black 25%, transparent 100%)`,
+                left: mousePos.x,
+                top: mousePos.y,
               }}
-            >
-              {/* Illuminated artwork layer */}
-              <div 
-                className="w-full h-full bg-contain bg-center bg-no-repeat filter brightness-150 contrast-160"
-                style={{ backgroundImage: `url(${heroArtwork})` }}
-              />
-              
-              {/* Ambient warm amber glow following the cursor */}
-              <div 
-                className="absolute pointer-events-none -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-[#FF6600]/30 rounded-full blur-3xl"
-                style={{
-                  left: mousePos.x,
-                  top: mousePos.y,
-                }}
-              />
-            </div>
-
-            {/* Minimal Cursor Instruction */}
-            <div className="absolute bottom-2 right-4 z-30 text-[10px] font-mono text-white/30 tracking-widest uppercase pointer-events-none flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FF5500] animate-pulse" />
-              <span>Hover to illuminate figures • Click to burst</span>
-            </div>
-          </SwarmCursor>
-        </div>
+            />
+          </div>
+        </SwarmCursor>
       </div>
 
-      {/* 2. Headline & Action Buttons (Pure, clean, confident row) */}
-      <div className="relative z-20 shrink-0 flex flex-col md:flex-row md:items-end justify-between gap-6 pt-2 pb-2">
-        {/* Left: Stark Headline */}
-        <div className="max-w-xl">
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-normal tracking-tight leading-[1.08]">
-            <span className="text-white block font-medium">Where builders connect</span>
-            <span className="text-white/40 block font-light">the architecture</span>
-            <span className="text-white/40 block font-light">they believe in</span>
-          </h1>
-        </div>
-
-        {/* Right: Stark Action Buttons */}
-        <div className="shrink-0 flex items-center gap-3">
-          <a
-            href={SOCIAL_LINKS.discord}
-            target="_blank"
-            rel="noreferrer"
-            className="px-7 py-3 bg-white text-black text-xs font-mono uppercase tracking-widest font-semibold hover:bg-white/90 transition-all flex items-center gap-2 group"
-          >
-            <span>Enter Discord Guild</span>
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-          </a>
-
-          <div className="hidden sm:flex items-center gap-2 px-4 py-3 border border-white/15 text-xs font-mono text-white/70">
-            <span className="text-[#FF5500]">$</span>
-            <span>npx devupward</span>
+      {/* 2. Middle-Left Hero Composition */}
+      <div className="relative z-30 w-full max-w-7xl mx-auto px-6 sm:px-12 pointer-events-auto">
+        <div className="inline-flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-10 max-w-full">
+          
+          {/* Headline on the left */}
+          <div className="shrink-0 max-w-lg">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight leading-[1.08] drop-shadow-2xl">
+              <span className="text-white block font-medium">Where builders connect</span>
+              <span className="text-white/40 block font-light">the architecture</span>
+              <span className="text-white/40 block font-light">they believe in</span>
+            </h1>
           </div>
+
+          {/* CTA Group immediately to the right, stacked vertically */}
+          <div className="shrink-0 flex flex-col gap-3 pt-2 lg:pt-0">
+            <a
+              href={SOCIAL_LINKS.discord}
+              target="_blank"
+              rel="noreferrer"
+              className="px-7 py-3 bg-white text-black text-xs font-mono uppercase tracking-widest font-semibold hover:bg-white/90 transition-all flex items-center justify-center gap-2 group shadow-2xl"
+            >
+              <span>Enter Discord Guild</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </a>
+
+            <div className="flex items-center justify-center gap-2 px-4 py-3 border border-white/20 bg-black/60 backdrop-blur-md text-xs font-mono text-white/80">
+              <span className="text-[#FF5500]">$</span>
+              <span>npx devupward</span>
+            </div>
+
+            {/* Interaction hint placed below the CTA group */}
+            <div className="pt-2 text-[10px] font-mono text-white/40 tracking-widest uppercase flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF5500] animate-pulse" />
+              <span>Hover to illuminate • Click to burst</span>
+            </div>
+          </div>
+
         </div>
       </div>
 
