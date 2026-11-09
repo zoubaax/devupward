@@ -1,11 +1,95 @@
 @import "tailwindcss";
 
+@theme {
+  --font-serif: 'Instrument Serif', Georgia, serif;
+}
+
 @layer base {
   body {
-    background-color: #000000;
-    color: #FFFFFF;
+    background-color: #08090C;
+    color: #F3F4F6;
     font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Plus Jakarta Sans', system-ui, sans-serif;
   }
+}
+
+/* 3D Transform Utilities for Holographic Flip Card */
+.perspective-1200 {
+  perspective: 1200px;
+}
+.perspective-1600 {
+  perspective: 1600px;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Card Holographic Themes (Dark Mode Adapted) */
+.card-theme-gold {
+  --theme-c1: #ffe2a0;
+  --theme-c2: #f2a93b;
+  --theme-c3: #c9741a;
+  --theme-accent: #ffc95c;
+  --theme-glow: 242, 169, 59;
+}
+.card-theme-red {
+  --theme-c1: #ffb9ad;
+  --theme-c2: #f0584d;
+  --theme-c3: #b8231f;
+  --theme-accent: #ff8273;
+  --theme-glow: 240, 84, 74;
+}
+.card-theme-teal {
+  --theme-c1: #b8f6e8;
+  --theme-c2: #2ec4b0;
+  --theme-c3: #0d8a7e;
+  --theme-accent: #66f0d8;
+  --theme-glow: 46, 196, 176;
+}
+.card-theme-blue {
+  --theme-c1: #c8e4ff;
+  --theme-c2: #4c9bf0;
+  --theme-c3: #1d5fc4;
+  --theme-accent: #82c4ff;
+  --theme-glow: 76, 155, 240;
+}
+.card-theme-violet {
+  --theme-c1: #e4d6ff;
+  --theme-c2: #9a6ef0;
+  --theme-c3: #5b34c4;
+  --theme-accent: #c6a6ff;
+  --theme-glow: 154, 110, 240;
+}
+
+/* Desk Light Sweep Beam */
+@keyframes deskSweepBeam {
+  0% {
+    transform: translateX(-120%);
+  }
+  50%, 100% {
+    transform: translateX(250%);
+  }
+}
+
+.desk-sweep-animate {
+  animation: deskSweepBeam 6s ease-in-out infinite;
+}
+
+/* Shiny Text Sheen Animation */
+@keyframes shineSweep {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.animate-shine {
+  animation: shineSweep 4s linear infinite;
 }
 
 /* Subtle particle stipple overlay */
@@ -19,11 +103,11 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: #08090C;
 }
 ::-webkit-scrollbar-thumb {
-  background: #222222;
-  border-radius: 2px;
+  background: #1C1E26;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #FF5500;

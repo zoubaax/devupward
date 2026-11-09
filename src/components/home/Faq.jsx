@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { FAQS } from '../../data/community'
+import DecryptedText from '../reactbits/DecryptedText'
 
 export function Faq() {
   const [openIndex, setOpenIndex] = useState(0)
 
   return (
-    <section id="faq" className="py-24 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/10 bg-[#000000]">
+    <section id="faq" className="py-24 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/[0.08] bg-[#08090C]">
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div>
           <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#FF5500] block mb-2">
-            PROTOCOL // 06
+            <DecryptedText text="PROTOCOL // 07" animateOn="view" speed={30} />
           </span>
           <h2 className="text-3xl sm:text-4xl font-normal tracking-tight text-white">
             Frequently Answered
@@ -21,11 +22,11 @@ export function Faq() {
         </p>
       </div>
 
-      <div className="border border-white/10 divide-y divide-white/10">
+      <div className="border border-white/[0.08] divide-y divide-white/[0.08] rounded-xl overflow-hidden">
         {FAQS.map((faq, idx) => {
           const isOpen = openIndex === idx
           return (
-            <div key={idx} className="bg-[#000000] transition-colors">
+            <div key={idx} className="bg-[#0C0D14] transition-colors">
               <button
                 type="button"
                 onClick={() => setOpenIndex(isOpen ? -1 : idx)}

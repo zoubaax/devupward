@@ -1,6 +1,7 @@
 import React from 'react'
 import { NAV_LINKS, SOCIAL_LINKS } from '../../data/navigation'
 import { DiscordIcon, GithubIcon } from './BrandIcons'
+import ShinyText from '../reactbits/ShinyText'
 
 export function Footer() {
   return (
@@ -84,7 +85,9 @@ export function Footer() {
         <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 font-mono gap-4">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>All Systems Operational • Mesh Online</span>
+            <ShinyText color="#9CA3AF" shineColor="#FFFFFF" speed={5}>
+              All Systems Operational • Mesh Online
+            </ShinyText>
           </div>
           <div>
             © 2026 DevUpward. Building What's Next.

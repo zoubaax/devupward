@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { ArrowUpRight, Terminal, Hash, Users, GitBranch } from 'lucide-react'
+import { ArrowUpRight, Hash, GitBranch } from 'lucide-react'
 import { SOCIAL_LINKS } from '../../data/navigation'
+import DecryptedText from '../reactbits/DecryptedText'
 
 const DETAILED_TRACKS = [
   {
@@ -78,13 +79,13 @@ export function Tracks() {
   const currentTrack = DETAILED_TRACKS.find((t) => t.id === activeTrackId) || DETAILED_TRACKS[0]
 
   return (
-    <section id="tracks" className="py-24 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/10 bg-[#000000]">
+    <section id="tracks" className="py-24 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/[0.08] bg-[#08090C]">
       
       {/* Section Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div>
           <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#FF5500] block mb-2">
-            SPECIALIZED CHANNELS // 02
+            <DecryptedText text="SPECIALIZED CHANNELS // 02" animateOn="view" speed={30} />
           </span>
           <h2 className="text-3xl sm:text-4xl font-normal tracking-tight text-white">
             Engineering Guilds
@@ -135,7 +136,7 @@ export function Tracks() {
         </div>
 
         {/* Right Column: Live Channel Inspector Terminal */}
-        <div className="lg:col-span-7 border border-white/10 bg-[#050505] p-6 sm:p-8 flex flex-col justify-between">
+        <div className="lg:col-span-7 border border-white/[0.08] bg-[#0C0D14] p-6 sm:p-8 flex flex-col justify-between rounded-xl">
           <div>
             {/* Terminal Window Header */}
             <div className="flex items-center justify-between pb-4 border-b border-white/10 text-xs font-mono">
@@ -174,7 +175,7 @@ export function Tracks() {
                 <span className="text-[10px] font-mono uppercase text-white/40 tracking-wider block mb-2">
                   SYSTEM LOGS
                 </span>
-                <div className="bg-black p-4 border border-white/5 font-mono text-xs text-white/70 space-y-1">
+                <div className="bg-[#08090C] p-4 border border-white/[0.06] font-mono text-xs text-white/70 space-y-1 rounded-lg">
                   {currentTrack.terminalLogs.map((log, i) => (
                     <div key={i} className={i === 0 ? 'text-[#FF5500]' : 'text-white/60'}>
                       {log}

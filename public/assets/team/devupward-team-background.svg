@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="850" viewBox="0 0 1600 850" fill="none">
+<defs>
+ <linearGradient id="code" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#727F94" stop-opacity=".43"/><stop offset="1" stop-color="#91A8C2" stop-opacity=".15"/></linearGradient>
+ <linearGradient id="rocket" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7D9AB7" stop-opacity=".40"/><stop offset="1" stop-color="#9FC9D9" stop-opacity=".22"/></linearGradient>
+ <linearGradient id="trophy" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#B4B1C8" stop-opacity=".35"/><stop offset="1" stop-color="#C7D5E5" stop-opacity=".18"/></linearGradient>
+ <filter id="glow" x="-30%" y="-40%" width="160%" height="180%"><feGaussianBlur stdDeviation="9"/></filter>
+ <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="7" stdDeviation="13" flood-color="#6E8AA0" flood-opacity=".13"/></filter>
+</defs>
+<!-- Translucent decorative pixels -->
+<g fill="#9CB9C6" opacity=".25"><rect x="124" y="320" width="31" height="31" rx="5"/><rect x="684" y="260" width="21" height="21" rx="4"/><rect x="855" y="82" width="24" height="24" rx="5"/><rect x="1180" y="370" width="28" height="28" rx="5"/><rect x="1467" y="160" width="36" height="36" rx="7"/><rect x="500" y="115" width="15" height="15" rx="3"/><rect x="135" y="185" width="13" height="13" rx="3"/><rect x="930" y="318" width="16" height="16" rx="3"/></g>
+<!-- Left code panel -->
+<g transform="translate(80 110) rotate(-3 215 155)" filter="url(#shadow)">
+ <rect x="-5" y="-5" width="449" height="319" rx="23" stroke="#E8F5FC" stroke-opacity=".48" stroke-width="17" filter="url(#glow)"/>
+ <rect width="440" height="310" rx="22" fill="url(#code)" stroke="#F1F7FF" stroke-opacity=".9" stroke-width="4"/>
+ <circle cx="35" cy="38" r="7" fill="#F8E1AF" opacity=".85"/><circle cx="59" cy="38" r="7" fill="#ABD0E8" opacity=".75"/><circle cx="83" cy="38" r="7" fill="#A8DBCC" opacity=".75"/>
+ <rect x="35" y="75" width="101" height="7" rx="3.5" fill="#B3C6D6" opacity=".65"/>
+ <rect x="35" y="103" width="53" height="8" rx="4" fill="#F5BC85"/><rect x="104" y="103" width="150" height="8" rx="4" fill="#B4D8E8"/><rect x="269" y="103" width="54" height="8" rx="4" fill="#A1D9C7"/>
+ <rect x="60" y="134" width="119" height="8" rx="4" fill="#AFD9EC"/><rect x="192" y="134" width="85" height="8" rx="4" fill="#E6BE92"/>
+ <rect x="60" y="165" width="165" height="8" rx="4" fill="#B6D9E9"/><rect x="239" y="165" width="68" height="8" rx="4" fill="#A8DCCB"/>
+ <rect x="35" y="196" width="77" height="8" rx="4" fill="#F2C090"/><rect x="127" y="196" width="202" height="8" rx="4" fill="#B0D7E7"/>
+ <rect x="60" y="227" width="138" height="8" rx="4" fill="#A8DCCB"/><rect x="211" y="227" width="116" height="8" rx="4" fill="#B4D9ED"/>
+ <rect x="35" y="258" width="80" height="8" rx="4" fill="#B0D7E7"/><rect x="133" y="258" width="128" height="8" rx="4" fill="#F4C18B"/>
+</g>
+<!-- Trophy panel upper middle -->
+<g transform="translate(750 25) rotate(-5 182 105)" filter="url(#shadow)">
+ <rect width="360" height="212" rx="23" fill="url(#trophy)" stroke="#F6F6FF" stroke-width="4" stroke-opacity=".94"/>
+ <g transform="translate(143 37)" fill="#F6D9A0" stroke="#FFE8BD" stroke-width="3" stroke-linejoin="round">
+  <path d="M8 15h54v35c0 25-12 39-27 40C20 89 8 75 8 50V15Z"/>
+  <path d="M8 24h-19v11c0 19 10 28 28 29M62 24h19v11c0 19-10 28-28 29" fill="none" stroke-width="9"/>
+  <path d="M35 90v22M15 112h40v11H15zM6 123h58v9H6z"/>
+ </g>
+</g>
+<!-- Rocket panel right -->
+<g transform="translate(1200 135) rotate(-3 160 126)" filter="url(#shadow)">
+ <rect width="340" height="251" rx="22" fill="url(#rocket)" stroke="#ECF8FF" stroke-width="4" stroke-opacity=".95"/>
+ <circle cx="31" cy="32" r="5" fill="#D2EAF5"/><circle cx="49" cy="32" r="5" fill="#D2EAF5"/><circle cx="67" cy="32" r="5" fill="#D2EAF5"/>
+ <g fill="#F2F8F9" font-family="Arial, sans-serif" font-size="27" font-weight="600"><text x="34" y="129">Hackathon</text><text x="34" y="165">Ready</text></g>
+ <g transform="translate(240 85) rotate(25)" stroke="#F1FAFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M0 52C0 15 10 0 28-20c18 20 28 35 28 72L28 82 0 52Z" fill="#E7F5FC" fill-opacity=".87"/><circle cx="28" cy="28" r="12" fill="#9DBDD1"/><path d="M0 55-15 79l19-7M56 55l15 24-19-7M18 93l10 30 10-30" fill="none"/></g>
+</g>
+</svg>

@@ -56,7 +56,7 @@ export function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-black/95 border-b border-white/10 px-6 py-6 space-y-4">
+        <div className="md:hidden bg-[#08090C]/95 backdrop-blur-xl border-b border-white/[0.08] px-6 py-6 space-y-4">
           {NAV_LINKS.map((link) => (
             <a 
               key={link.label}

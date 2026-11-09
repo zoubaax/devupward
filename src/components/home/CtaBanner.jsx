@@ -1,23 +1,27 @@
 import React from 'react'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Terminal } from 'lucide-react'
 import { SOCIAL_LINKS } from '../../data/navigation'
+import DecryptedText from '../reactbits/DecryptedText'
+import SpotlightCard from '../reactbits/SpotlightCard'
 
 export function CtaBanner() {
   return (
-    <section className="py-24 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/10 bg-[#000000]">
-      <div className="border border-white/10 p-10 sm:p-16 relative overflow-hidden bg-gradient-to-b from-white/[0.02] to-transparent">
-        
+    <section className="py-24 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/[0.08] bg-[#08090C]">
+      <SpotlightCard
+        spotlightColor="rgba(255, 85, 0, 0.3)"
+        className="rounded-2xl border border-white/[0.12] p-10 sm:p-16 relative overflow-hidden bg-gradient-to-b from-[#0F1118] to-[#0A0B10]"
+      >
         {/* Subtle orange accent line */}
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#FF5500] to-transparent opacity-80" />
 
-        <div className="max-w-2xl">
+        <div className="max-w-2xl relative z-10">
           <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#FF5500] block mb-3">
-            INITIALIZE // 07
+            <DecryptedText text="INITIALIZE // 08" animateOn="view" speed={30} />
           </span>
           <h2 className="text-3xl sm:text-5xl font-normal tracking-tight text-white mb-4 leading-tight">
             Stop coding in isolation.
           </h2>
-          <p className="text-white/60 text-xs sm:text-sm font-mono mb-8 leading-relaxed">
+          <p className="text-white/70 text-xs sm:text-sm font-mono mb-8 leading-relaxed">
             Join 2,800+ builders worldwide. Ship open-source code, get PR reviews, and build what's next.
           </p>
 
@@ -26,14 +30,15 @@ export function CtaBanner() {
               href={SOCIAL_LINKS.discord}
               target="_blank"
               rel="noreferrer"
-              className="px-8 py-3.5 bg-white text-black text-xs font-mono uppercase tracking-widest font-semibold hover:bg-white/90 transition-all flex items-center gap-2 group"
+              className="px-8 py-3.5 bg-white text-black text-xs font-mono uppercase tracking-widest font-semibold hover:bg-white/90 transition-all flex items-center gap-2 group rounded-full shadow-2xl"
             >
               <span>Enter Discord Sanctuary</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </a>
 
-            <div className="px-5 py-3.5 border border-white/15 text-xs font-mono text-white/60">
-              <span className="text-[#FF5500]">$</span> npx devupward join
+            <div className="px-5 py-3.5 border border-white/15 text-xs font-mono text-white/70 rounded-full bg-[#08090C]/80 flex items-center gap-2 backdrop-blur-sm">
+              <Terminal className="w-3.5 h-3.5 text-[#FF5500]" />
+              <span>npx devupward join</span>
             </div>
           </div>
         </div>
@@ -42,7 +47,7 @@ export function CtaBanner() {
         <div className="absolute -right-10 -bottom-10 opacity-5 pointer-events-none hidden md:block">
           <img src="/logo.png" alt="DevUpward" className="h-64 w-auto object-contain" />
         </div>
-      </div>
+      </SpotlightCard>
     </section>
   )
 }

@@ -1,15 +1,17 @@
 import React from 'react'
 import { COMMUNITY_PROJECTS } from '../../data/community'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Star, GitBranch } from 'lucide-react'
 import { SOCIAL_LINKS } from '../../data/navigation'
+import SpotlightCard from '../reactbits/SpotlightCard'
+import DecryptedText from '../reactbits/DecryptedText'
 
 export function Showcase() {
   return (
-    <section id="showcase" className="py-24 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/10 bg-[#000000]">
+    <section id="showcase" className="py-24 px-6 sm:px-12 max-w-7xl mx-auto border-t border-white/[0.08] bg-[#08090C]">
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div>
           <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#FF5500] block mb-2">
-            PROOF OF WORK // 03
+            <DecryptedText text="PROOF OF WORK // 04" animateOn="view" speed={30} />
           </span>
           <h2 className="text-3xl sm:text-4xl font-normal tracking-tight text-white">
             Shipped by Community Nodes
@@ -26,16 +28,20 @@ export function Showcase() {
         </a>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 border border-white/10">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {COMMUNITY_PROJECTS.map((proj) => (
-          <div 
-            key={proj.title} 
-            className="bg-[#000000] p-8 flex flex-col justify-between hover:bg-white/[0.02] transition-colors group"
+          <SpotlightCard
+            key={proj.title}
+            spotlightColor="rgba(255, 85, 0, 0.22)"
+            className="rounded-xl border border-white/[0.08] hover:border-white/20 transition-all p-8 flex flex-col justify-between group bg-[#0C0D14]"
           >
             <div>
               <div className="flex items-center justify-between mb-6 text-[11px] font-mono text-white/40">
-                <span>★ {proj.stars} STARS</span>
-                <span className="text-white/30">{proj.author}</span>
+                <span className="flex items-center gap-1 text-[#FFAA55]">
+                  <Star className="w-3 h-3 fill-[#FFAA55]" />
+                  <span>{proj.stars} STARS</span>
+                </span>
+                <span className="text-white/40">{proj.author}</span>
               </div>
 
               <h3 className="text-xl font-normal text-white mb-2 group-hover:text-[#FFAA55] transition-colors">
@@ -49,7 +55,7 @@ export function Showcase() {
             <div>
               <div className="flex flex-wrap gap-1.5 mb-6">
                 {proj.tags.map((tag) => (
-                  <span key={tag} className="text-[10px] font-mono px-2 py-0.5 border border-white/10 text-white/50">
+                  <span key={tag} className="text-[10px] font-mono px-2 py-0.5 border border-white/10 text-white/50 rounded-sm bg-white/[0.02]">
                     {tag}
                   </span>
                 ))}
@@ -59,13 +65,14 @@ export function Showcase() {
                 href={SOCIAL_LINKS.github}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full py-2 border border-white/10 hover:border-white/30 text-white/60 hover:text-white text-[11px] font-mono uppercase tracking-wider flex items-center justify-center gap-2 transition-colors"
+                className="w-full py-2.5 border border-white/10 hover:border-white/30 text-white/70 hover:text-white text-[11px] font-mono uppercase tracking-wider flex items-center justify-center gap-2 transition-colors rounded-sm bg-white/[0.02]"
               >
+                <GitBranch className="w-3 h-3 text-[#FF5500]" />
                 <span>Inspect Repository</span>
                 <ArrowUpRight className="w-3 h-3" />
               </a>
             </div>
-          </div>
+          </SpotlightCard>
         ))}
       </div>
     </section>
