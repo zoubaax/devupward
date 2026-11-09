@@ -24,7 +24,7 @@ export function Hero() {
     <section 
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full h-screen min-h-[720px] bg-[#000000] text-white flex items-center pt-16 overflow-hidden select-none cursor-crosshair"
+      className="relative w-full h-screen min-h-[720px] bg-[#000000] text-white flex items-center pt-16 overflow-hidden select-none cursor-crosshair group"
     >
       {/* 1. Fullscreen Background Image & SwarmCursor Canvas */}
       <div className="absolute inset-0 w-full h-full">
@@ -38,27 +38,27 @@ export function Hero() {
           accentColor="#FF5500"
           className="w-full h-full"
         >
-          {/* Base Artwork - Scaled & Positioned to eliminate excess black space at the top */}
+          {/* Base Artwork - Shifted right (64% 38%) for editorial balance */}
           <div 
-            className="absolute inset-0 w-full h-full bg-cover bg-[center_35%] bg-no-repeat opacity-90 filter brightness-95 contrast-110"
+            className="absolute inset-0 w-full h-full bg-cover bg-[64%_38%] bg-no-repeat opacity-90 filter brightness-95 contrast-110"
             style={{ backgroundImage: `url(${heroArtwork})` }}
           />
 
-          {/* Vignette Gradients: Smoothly fades edges */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/60 pointer-events-none z-10" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/60 pointer-events-none z-10" />
+          {/* Vignette Gradients */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/60 pointer-events-none z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/60 pointer-events-none z-10" />
 
-          {/* Dynamic Torch Light on Hover */}
+          {/* Dynamic Torch Light on Hover (Over Artwork) */}
           <div 
             className="absolute inset-0 w-full h-full pointer-events-none z-10 transition-opacity duration-200"
             style={{
               opacity: mousePos.active ? 1 : 0,
-              maskImage: `radial-gradient(circle 340px at ${mousePos.x}px ${mousePos.y}px, black 25%, transparent 100%)`,
-              WebkitMaskImage: `radial-gradient(circle 340px at ${mousePos.x}px ${mousePos.y}px, black 25%, transparent 100%)`,
+              maskImage: `radial-gradient(circle 360px at ${mousePos.x}px ${mousePos.y}px, black 25%, transparent 100%)`,
+              WebkitMaskImage: `radial-gradient(circle 360px at ${mousePos.x}px ${mousePos.y}px, black 25%, transparent 100%)`,
             }}
           >
             <div 
-              className="w-full h-full bg-cover bg-[center_35%] bg-no-repeat filter brightness-150 contrast-160"
+              className="w-full h-full bg-cover bg-[64%_38%] bg-no-repeat filter brightness-150 contrast-160"
               style={{ backgroundImage: `url(${heroArtwork})` }}
             />
             {/* Ambient warm amber glow following the cursor */}
@@ -73,37 +73,40 @@ export function Hero() {
         </SwarmCursor>
       </div>
 
-      {/* 2. Middle-Left Hero Composition: Headline + Buttons Stacked Down Below It */}
+      {/* 2. Middle-Left Hero Composition: Single Crisp Layer */}
       <div className="relative z-30 w-full max-w-7xl mx-auto px-6 sm:px-12 pointer-events-auto">
-        <div className="max-w-xl flex flex-col gap-6">
+        <div className="max-w-lg flex flex-col gap-6">
           
-          {/* Headline */}
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight leading-[1.08] drop-shadow-2xl">
-            <span className="text-white block font-medium">Where builders connect</span>
-            <span className="text-white/40 block font-light">the architecture</span>
-            <span className="text-white/40 block font-light">they believe in</span>
+          {/* Headline in exactly 2 lines with italic serif contrast */}
+          <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-normal tracking-tight leading-[1.15] drop-shadow-2xl">
+            <span className="text-white block font-medium whitespace-nowrap">
+              Where builders connect
+            </span>
+            <span className="text-white/80 block mt-1 font-light whitespace-nowrap">
+              the <span className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#FF5500] via-[#FF7722] to-[#FFAA44] px-0.5">architecture</span> they believe in
+            </span>
           </h1>
 
-          {/* CTAs positioned down below the text */}
-          <div className="flex flex-col sm:flex-row sm:items-center gap-3 pt-1">
+          {/* CTAs: Linkmake-style pill buttons */}
+          <div className="flex flex-wrap items-center gap-3 pt-1">
             <a
               href={SOCIAL_LINKS.discord}
               target="_blank"
               rel="noreferrer"
-              className="px-7 py-3 bg-white text-black text-xs font-mono uppercase tracking-widest font-semibold hover:bg-white/90 transition-all flex items-center justify-center gap-2 group shadow-2xl"
+              className="px-6 py-3 rounded-full bg-white text-black text-xs font-mono uppercase tracking-wider font-semibold hover:bg-white/90 transition-all flex items-center justify-center gap-2 group shadow-2xl"
             >
               <span>Enter Discord Guild</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </a>
 
-            <div className="flex items-center justify-center gap-2 px-4 py-3 border border-white/20 bg-black/60 backdrop-blur-md text-xs font-mono text-white/80">
+            <div className="flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-white/20 bg-white/[0.04] backdrop-blur-md text-xs font-mono text-white/80">
               <span className="text-[#FF5500]">$</span>
               <span>npx devupward</span>
             </div>
           </div>
 
           {/* Interaction hint */}
-          <div className="text-[10px] font-mono text-white/40 tracking-widest uppercase flex items-center gap-2">
+          <div className="text-[10px] font-mono text-white/35 tracking-widest uppercase flex items-center gap-2 pt-1">
             <span className="w-1.5 h-1.5 rounded-full bg-[#FF5500] animate-pulse" />
             <span>Hover to illuminate • Click to burst</span>
           </div>
